@@ -1,0 +1,24 @@
+<div class="code-pane code-pane-desktop">
+  <div class="pane-label">resume.pdf</div>
+  <pre class="code-scroll">{{ resume_code }}</pre>
+</div>
+<div class="preview-pane resume-preview">
+  <h1>Resume</h1>
+  <p>Download my professional CV in PDF format.</p>
+  <div class="resume-stats">
+    <div>
+      <strong>{{ experience|length }}+</strong>
+      <span>roles</span>
+    </div>
+    <div>
+      <strong>{{ projects|length }}</strong>
+      <span>projects</span>
+    </div>
+    <div>
+      <strong>{{ education|length }}</strong>
+      <span>degrees</span>
+    </div>
+  </div>
+  <button type="button" class="primary-btn" onclick="window.open('{{ resume_pdf_url }}', '_blank')">Download PDF</button>
+  <p class="muted">Place PriyanshuSharma_Resume.pdf in frontend/public/</p>
+</div>

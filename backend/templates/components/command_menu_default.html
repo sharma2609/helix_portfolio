@@ -1,0 +1,54 @@
+{% for section in nav_sections %}
+<section class="command-menu-section">
+  <div class="command-menu-section-head">
+    <h3 class="command-menu-heading">{{ section.label }}</h3>
+    <span class="command-menu-section-desc">{{ section.description }}</span>
+  </div>
+  <ul class="command-menu-grid">
+    {% for name in section.files %}
+    <li>
+      <button type="button" class="command-menu-item" data-palette-file="{{ name }}">
+        <span class="command-menu-item-label">{{ file_meta[name]['label'] }}</span>
+        <span class="command-menu-item-file">{{ name }}</span>
+      </button>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+
+<section class="command-menu-section">
+  <div class="command-menu-section-head">
+    <h3 class="command-menu-heading">Appearance</h3>
+    <span class="command-menu-section-desc">Select theme</span>
+  </div>
+  <ul class="command-menu-chips">
+    {% for theme in themes %}
+    <li>
+      <button type="button" class="command-menu-chip{% if theme.id == default_theme %} active{% endif %}" data-theme-select="{{ theme.id }}">
+        {{ theme.label }}
+      </button>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="command-menu-section">
+  <h3 class="command-menu-heading">Shortcuts</h3>
+  <ul class="command-menu-shortcuts">
+    {% for kb in keybindings %}
+    <li>
+      <button type="button" class="command-menu-shortcut" data-palette-action="{{ kb.id }}">
+        <kbd>{{ kb["keys"] }}</kbd>
+        <span>{{ kb.label }}</span>
+      </button>
+    </li>
+    {% endfor %}
+    <li>
+      <button type="button" class="command-menu-shortcut" data-palette-action="toggle-assistant">
+        <kbd>chat</kbd>
+        <span>Open assistant panel</span>
+      </button>
+    </li>
+  </ul>
+</section>

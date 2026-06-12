@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="helix">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Helix Portfolio — {{ p.name }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/helix.css" />
+  <link rel="stylesheet" href="/static/css/preview.css" />
+  <link rel="stylesheet" href="/static/css/themes.css" />
+</head>
+<body>
+  <div class="helix-window">
+    <header class="command-bar">
+      <div class="command-bar-left">
+        <div class="brand-lockup" title="{{ p.name }}">
+          <span class="ps-logo" aria-hidden="true">PS</span>
+          <span class="brand-name">{{ p.name }}</span>
+        </div>
+        <nav class="command-nav" aria-label="Editor controls">
+          <button type="button" class="cmd-btn cmd-btn-primary" id="menu-btn" title="Command menu (Ctrl+P)">Menu</button>
+          <button type="button" class="cmd-btn active" id="assistant-btn" title="Toggle assistant (Ctrl+S)">Assistant</button>
+        </nav>
+      </div>
+      <div class="command-bar-right">
+        <nav class="social-nav" aria-label="Social links">
+          <a href="{{ p.socials.github }}" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="{{ p.socials.linkedin }}" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="mailto:{{ p.email }}" class="social-cta">Hire me</a>
+        </nav>
+        <span class="hint">Ctrl+P</span>
+      </div>
+    </header>
+
+    <div class="helix-body">
+      <div class="helix-main">
+        <div class="buffer-tabs" id="buffer-tabs-container"></div>
+        <main class="editor-area" id="editor-area">
+          {% include 'welcome.html' %}
+        </main>
+        <section class="bottom-panel" id="bottom-panel">
+          <div class="bottom-tabs">
+            <button type="button" id="bottom-menu-btn">menu</button>
+            <button type="button" class="active" id="bottom-chat-btn">assistant</button>
+          </div>
+          <div class="bottom-content">
+            <div class="bottom-tab-content hidden" id="bottom-content-menu">
+              {% include 'components/command_menu_embedded.html' %}
+            </div>
+            <div class="bottom-tab-content" id="bottom-content-chat">
+              {% include 'components/chat_pane.html' %}
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <footer class="status-line">
+      <span class="mode">NORMAL</span>
+      <span id="status-active-tab">welcome</span>
+      <span class="theme-label" id="status-theme">helix</span>
+      <span class="spacer"></span>
+      <span>{{ location_short }}</span>
+      <span id="status-clock"></span>
+    </footer>
+  </div>
+
+  {% include 'components/command_palette.html' %}
+
+  <script>
+    window.__PORTFOLIO_DATA__ = {{ portfolio_json|safe }};
+    window.__FILE_GROUPS__ = {{ file_groups_json|safe }};
+  </script>
+  <script src="/static/js/dino.js"></script>
+  <script src="/static/js/chat.js"></script>
+  <script src="/static/js/editor.js"></script>
+</body>
+</html>

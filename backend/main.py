@@ -6,13 +6,14 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
-from routers import buffers, chat, portfolio, search
+from routers import buffers, chat, pages, portfolio, search
 
 logger = logging.getLogger("helix")
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
-app = FastAPI(title="Helix Portfolio API", version="0.1.0")
+app = FastAPI(title="Helix Portfolio", version="0.2.0")
 
 origins = os.getenv("CORS_ORIGINS", "*")
 app.add_middleware(
@@ -33,12 +34,17 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
+BASE_DIR = Path(__file__).resolve().parent
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
+
+pages._init_templates(templates)
+
 app.include_router(portfolio.router)
 app.include_router(buffers.router)
 app.include_router(chat.router)
 app.include_router(search.router)
+app.include_router(pages.router)
 
-if os.getenv("SERVE_STATIC") == "1":
-    dist = Path(__file__).resolve().parent.parent / "frontend" / "dist"
-    if dist.is_dir():
-        app.mount("/", StaticFiles(directory=dist, html=True), name="static")
+static_dir = BASE_DIR / "static"
+if static_dir.is_dir():
+    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")

@@ -1,0 +1,42 @@
+<div class="code-pane code-pane-desktop">
+  <div class="pane-label">contact.html</div>
+  <pre class="code-scroll">{{ contact_code }}</pre>
+</div>
+<div class="preview-pane">
+  <h1>Get in Touch</h1>
+  <p class="preview-lead">Let's connect and discuss opportunities.</p>
+  <dl class="contact-list">
+    <div class="contact-row">
+      <dt>Name</dt>
+      <dd>{{ p.name }}</dd>
+    </div>
+    <div class="contact-row">
+      <dt>Role</dt>
+      <dd>{{ p.role }}</dd>
+    </div>
+    <div class="contact-row">
+      <dt>Location</dt>
+      <dd>{{ p.location }}</dd>
+    </div>
+    <div class="contact-row">
+      <dt>Email</dt>
+      <dd><a href="mailto:{{ p.email }}">{{ p.email }}</a></dd>
+    </div>
+    <div class="contact-row">
+      <dt>Phone</dt>
+      <dd><a href="tel:{{ p.phone }}">{{ p.phone }}</a></dd>
+    </div>
+    <div class="contact-row">
+      <dt>LinkedIn</dt>
+      <dd><a href="{{ p.socials.linkedin }}" target="_blank" rel="noreferrer">Priyanshu Sharma</a></dd>
+    </div>
+    <div class="contact-row">
+      <dt>GitHub</dt>
+      <dd><a href="{{ p.socials.github }}" target="_blank" rel="noreferrer">sharma2609</a></dd>
+    </div>
+    <div class="contact-row">
+      <dt>Portfolio</dt>
+      <dd><a href="{{ p.socials.portfolio }}" target="_blank" rel="noreferrer">priyanshusharma.dev</a></dd>
+    </div>
+  </dl>
+</div>

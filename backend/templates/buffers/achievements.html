@@ -1,0 +1,18 @@
+<div class="code-pane code-pane-desktop">
+  <div class="pane-label">extracurriculars.git</div>
+  <pre class="code-scroll">{{ achievements_code }}</pre>
+</div>
+<div class="preview-pane">
+  <h1>Achievements &amp; Hobbies</h1>
+  <ul class="timeline">
+    {% for item in achievement_items %}
+    <li>
+      <span class="commit-type {{ item.type }}">{{ item.type }}</span>
+      <span>{{ item.text }}</span>
+      {% if item.date %}
+      <small>{{ p.name }} · {{ item.date }}</small>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>

@@ -1,0 +1,37 @@
+<div class="code-pane code-pane-desktop">
+  <div class="pane-label">about.md</div>
+  <pre class="code-scroll">{{ about_code }}</pre>
+</div>
+<div class="preview-pane">
+  <h1>About Me</h1>
+  <p>Hello! I'm <strong>{{ p.name }}</strong>, {{ p.role }}.</p>
+  <div class="tag-grid">
+    {% for group in tag_groups %}
+    <div class="tag-group">
+      <h3>{{ group.label }}</h3>
+      <div class="tags">
+        {% for item in group["items"] %}
+        <span class="tag">{{ item }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <section class="exp-section">
+    <h2 class="section-title">Experience</h2>
+    {% for exp in experience %}
+    <article class="exp-card">
+      <p class="exp-title">{{ exp.title }} · {{ exp.company }}</p>
+      <p class="exp-period">{{ exp.period }}</p>
+      <p class="exp-desc">{{ exp.description }}</p>
+      {% if exp.highlights %}
+      <ul class="exp-highlights">
+        {% for h in exp.highlights %}
+        <li>{{ h }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+</div>

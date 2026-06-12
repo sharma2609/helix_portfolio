@@ -2,7 +2,7 @@
   "name": "helix-portfolio",
   "private": true,
   "scripts": {
-    "dev": "npm run dev --prefix frontend",
-    "build": "npm run build --prefix frontend"
+    "dev": "cd backend && .venv/bin/uvicorn main:app --reload --port 8000",
+    "build": "echo 'No build step needed for Python + Jinja2'"
   }
 }
