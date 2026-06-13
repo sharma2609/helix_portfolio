@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from config import FILE_ENTRIES
+from services.common import get_file_groups
 from services.data import load_portfolio
 
 router = APIRouter(prefix="/api", tags=["portfolio"])
@@ -18,13 +19,5 @@ def get_portfolio():
 
 @router.get("/files")
 def list_files():
-    groups: dict[str, list[str]] = {
-        "portfolio": [],
-        "career": [],
-        "playground": [],
-    }
-    for entry in FILE_ENTRIES:
-        group = entry.get("group", "portfolio")
-        if group in groups:
-            groups[group].append(entry["name"])
+    groups = get_file_groups()
     return {"files": [e["name"] for e in FILE_ENTRIES], "groups": groups}

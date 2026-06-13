@@ -16,8 +16,12 @@ function initChatSuggestions() {
   if (!container) return;
   container.innerHTML = CHAT_SUGGESTIONS.map(
     (q) =>
-      `<button type="button" class="chat-suggestion" onclick="sendChatMessage(this.textContent)">${q}</button>`
+      `<button type="button" class="chat-suggestion" data-chat-text="${q}">${q}</button>`
   ).join("");
+  container.addEventListener("click", (e) => {
+    const btn = e.target.closest(".chat-suggestion");
+    if (btn) sendChatMessage(btn.dataset.chatText);
+  });
 }
 
 function onChatSubmit(e) {
@@ -93,4 +97,4 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
-document.addEventListener("DOMContentLoaded", initChat);
+initChat();

@@ -28,8 +28,8 @@
   padding: 4px 8px;
   border-radius: 4px;
   margin: 0 0 1rem;
-  border: 1px solid transparent;
-  border-image: linear-gradient(135deg, var(--accent), var(--accent-soft)) 1;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-dim);
 }
 
 .preview-pane h1 {
@@ -78,8 +78,8 @@
 }
 
 .preview-actions button:hover {
-  border-color: transparent;
-  border-image: linear-gradient(135deg, var(--accent), var(--accent-soft)) 1;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-dim);
   background: var(--accent-dim);
   color: var(--accent);
 }

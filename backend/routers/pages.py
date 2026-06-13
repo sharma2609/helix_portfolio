@@ -1,15 +1,17 @@
+import json
+
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
 from config import (
-    FILE_ENTRIES,
     FILE_META,
     KEYBINDINGS,
     NAV_SECTIONS,
     RESUME_PDF_URL,
     THEMES,
 )
+from services.common import get_file_groups
 from services.data import load_portfolio
 from services.templates import (
     template_about,
@@ -46,17 +48,8 @@ def _achievement_meta(text: str) -> dict:
     return {"type": "feat", "date": ""}
 
 
-def _get_groups():
-    groups: dict[str, list[str]] = {"portfolio": [], "career": [], "playground": []}
-    for entry in FILE_ENTRIES:
-        group = entry.get("group", "portfolio")
-        if group in groups:
-            groups[group].append(entry["name"])
-    return groups
-
-
 def _nav_sections_with_files():
-    groups = _get_groups()
+    groups = get_file_groups()
     result = []
     for section in NAV_SECTIONS:
         files = groups.get(section["id"], [])
@@ -67,11 +60,11 @@ def _nav_sections_with_files():
 
 def _base_context(data: dict) -> dict:
     p = data["personalInfo"]
-    groups = _get_groups()
+    groups = get_file_groups()
     return {
         "p": p,
-        "portfolio_json": __import__("json").dumps(data),
-        "file_groups_json": __import__("json").dumps(groups),
+        "portfolio_json": json.dumps(data),
+        "file_groups_json": json.dumps(groups),
         "location_short": (p.get("location", "") or "").split(",")[0],
         "nav_sections": _nav_sections_with_files(),
         "file_meta": FILE_META,
@@ -135,10 +128,11 @@ def get_buffer(request: Request, name: str):
     elif name == "contact.html":
         ctx["contact_code"] = template_contact(p)
     elif name == "resume.pdf":
-        ctx["resume_code"] = template_resume(None)
+        ctx["resume_code"] = template_resume()
         ctx["experience"] = experience
         ctx["projects"] = projects
         ctx["education"] = education
+        ctx["resume_pdf_url"] = RESUME_PDF_URL
     elif name == "career_timeline.git":
         ctx["career_code"] = template_career_timeline(p)
         career_items = []
@@ -162,7 +156,7 @@ def get_buffer(request: Request, name: str):
             achievement_items.append({"type": meta["type"], "text": a, "date": meta["date"]})
         ctx["achievement_items"] = achievement_items
     elif name == "dino.js":
-        ctx["dino_code"] = template_dino(None)
+        ctx["dino_code"] = template_dino()
     else:
         from fastapi import HTTPException
         raise HTTPException(status_code=404, detail="Buffer not found")

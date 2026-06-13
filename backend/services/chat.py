@@ -39,8 +39,8 @@ def get_reply(message: str) -> str:
     education = data["education"]
     achievements = data["achievements"]
 
-    fake_news = projects[0]
-    translation = projects[1] if len(projects) >= 2 else projects[0]
+    fake_news = next((p for p in projects if "Fake News" in p["name"]), projects[0] if projects else {})
+    translation = next((p for p in projects if "Translation" in p["name"] or "Transliteration" in p["name"]), projects[0] if projects else {})
 
     if _match_words(text, _HELLO_WORDS):
         return (

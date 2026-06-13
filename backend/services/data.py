@@ -25,5 +25,5 @@ def load_portfolio() -> dict:
 def _load_portfolio() -> dict:
     with open(DATA_PATH, encoding="utf-8") as f:
         raw = json.load(f)
-    PortfolioData.model_validate(raw)
-    return raw
+    validated = PortfolioData.model_validate(raw)
+    return validated.model_dump()

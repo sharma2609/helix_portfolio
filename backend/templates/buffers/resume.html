@@ -1,3 +1,4 @@
+<div class="buffer-content" id="buffer-resume-pdf">
 <div class="code-pane code-pane-desktop">
   <div class="pane-label">resume.pdf</div>
   <pre class="code-scroll">{{ resume_code }}</pre>
@@ -19,6 +20,6 @@
       <span>degrees</span>
     </div>
   </div>
-  <button type="button" class="primary-btn" onclick="window.open('{{ resume_pdf_url }}', '_blank')">Download PDF</button>
-  <p class="muted">Place PriyanshuSharma_Resume.pdf in frontend/public/</p>
+  <button type="button" class="primary-btn" data-resume-pdf="{{ resume_pdf_url }}">Download PDF</button>
+</div>
 </div>

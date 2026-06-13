@@ -1,4 +1,10 @@
-:root,
+:root {
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --font-ui: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, monospace;
+  --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, monospace;
+}
+
 [data-theme="helix"] {
   --bg-base: #3b224c;
   --bg-surface: #281733;
@@ -20,10 +26,6 @@
   --warning: #ffcd1c;
   --obstacle-color: #f47868;
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --font-ui: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, monospace;
-  --font-mono: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, monospace;
 }
 
 [data-theme="catppuccin-mocha"] {

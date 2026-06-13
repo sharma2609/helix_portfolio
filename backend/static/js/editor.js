@@ -15,6 +15,7 @@ const HELIX_STATE = {
   bottomOpen: true,
   bottomTab: "chat",
   paletteOpen: false,
+  dinoGame: null,
 };
 
 function initEditor() {
@@ -52,16 +53,17 @@ function initKeyboard() {
 /* ---- Buffer / Tab Management ---- */
 
 function initBufferTabs() {
-  document.querySelectorAll(".buffer-tab button").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const tab = e.currentTarget.closest(".buffer-tab");
-      const name = tab.dataset.buffer;
-      if (e.target.classList.contains("tab-close")) {
-        closeTab(name);
-      } else {
-        switchTab(name);
-      }
-    });
+  const container = document.getElementById("buffer-tabs-container");
+  if (!container) return;
+  container.addEventListener("click", (e) => {
+    const tab = e.target.closest(".buffer-tab");
+    if (!tab) return;
+    const name = tab.dataset.buffer;
+    if (e.target.classList.contains("tab-close")) {
+      closeTab(name);
+    } else {
+      switchTab(name);
+    }
   });
 }
 
@@ -71,6 +73,13 @@ function openFile(name) {
   }
   HELIX_STATE.activeTab = name;
   renderTabs();
+  // Remove welcome screen when first buffer opens
+  const area = document.getElementById("editor-area");
+  const welcome = area.querySelector(".welcome-pane");
+  if (welcome && !area.querySelector(".buffer-content")) {
+    area.classList.add("split");
+    welcome.remove();
+  }
   loadBuffer(name);
   updateStatusLine();
 }
@@ -93,6 +102,8 @@ function closeTab(name) {
       ? HELIX_STATE.openTabs[HELIX_STATE.openTabs.length - 1]
       : null;
   }
+  const el = document.getElementById("buffer-" + name.replace(/[.#]/g, "-"));
+  if (el) el.remove();
   renderTabs();
   if (HELIX_STATE.activeTab) {
     showBuffer(HELIX_STATE.activeTab);
@@ -118,25 +129,47 @@ function renderTabs() {
     </div>`
     )
     .join("");
-  initBufferTabs();
 }
 
 function loadBuffer(name) {
   const area = document.getElementById("editor-area");
-  area.innerHTML = `<div class="editor-area loading-buffer"><span class="spinner"></span><span>loading ${name}…</span></div>`;
+  const existing = document.getElementById("buffer-" + name.replace(/[.#]/g, "-"));
+  if (existing) {
+    showBuffer(name);
+    return;
+  }
+
+  stopDinoGame();
+
+  // Remove welcome screen if present
+  const welcome = area.querySelector(".welcome-pane");
+  if (welcome) welcome.remove();
+
+  area.insertAdjacentHTML("beforeend",
+    '<div class="editor-area loading-buffer"><span class="spinner"></span><span>loading ' + name + '…</span></div>'
+  );
+
   fetch("/buffer/" + encodeURIComponent(name))
     .then((r) => {
       if (!r.ok) throw new Error("Failed to load");
       return r.text();
     })
     .then((html) => {
-      area.innerHTML = html;
+      const loading = area.querySelector(".loading-buffer");
+      if (loading) loading.remove();
       area.classList.add("split");
+      area.insertAdjacentHTML("beforeend", html);
+      showBuffer(name);
       initPreviewButtons();
-      initDinoGame();
+      if (name === "dino.js") initDinoGame();
     })
     .catch(() => {
-      area.innerHTML = `<div class="preview-pane empty">failed to load ${name}</div>`;
+      const loading = area.querySelector(".loading-buffer");
+      if (loading) loading.remove();
+      const err = document.createElement("div");
+      err.className = "preview-pane empty buffer-content";
+      err.textContent = "failed to load " + name;
+      area.appendChild(err);
     });
 }
 
@@ -144,11 +177,14 @@ function showBuffer(name) {
   document.querySelectorAll(".buffer-content").forEach((el) => el.classList.add("hidden"));
   const el = document.getElementById("buffer-" + name.replace(/[.#]/g, "-"));
   if (el) el.classList.remove("hidden");
+  initPreviewButtons();
 }
 
 function showWelcome() {
   const area = document.getElementById("editor-area");
   area.classList.remove("split");
+  area.querySelectorAll(".buffer-content").forEach((el) => el.remove());
+  area.querySelectorAll(".loading-buffer").forEach((el) => el.remove());
   fetch("/welcome")
     .then((r) => r.text())
     .then((html) => {
@@ -167,6 +203,9 @@ function initPreviewButtons() {
   document.querySelectorAll("[data-open-file]").forEach((btn) => {
     btn.addEventListener("click", () => openFile(btn.dataset.openFile));
   });
+  document.querySelectorAll("[data-resume-pdf]").forEach((btn) => {
+    btn.addEventListener("click", () => window.open(btn.dataset.resumePdf, "_blank"));
+  });
 }
 
 /* ---- Command Palette ---- */
@@ -175,6 +214,10 @@ function initCommandPalette() {
   document.getElementById("menu-btn")?.addEventListener("click", togglePalette);
   document.getElementById("palette-overlay")?.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) closePalette();
+  });
+  document.querySelector("[data-palette-close]")?.addEventListener("click", closePalette);
+  document.querySelector("[data-palette-search]")?.addEventListener("input", (e) => {
+    onPaletteSearch(e.target);
   });
 }
 
@@ -266,7 +309,10 @@ function onPaletteSearch(input) {
           "</ul></section>";
         initPaletteButtons();
       })
-      .catch(() => {});
+      .catch(() => {
+        const body = document.getElementById("palette-body");
+        body.innerHTML = '<section class="command-menu-section"><p class="command-menu-empty">Search unavailable. Try again.</p></section>';
+      });
   }, 150);
 }
 
@@ -288,6 +334,24 @@ function initAssistant() {
     HELIX_STATE.bottomTab = "chat";
     showBottomTab("chat");
   });
+
+  // Event delegation for embedded command menu buttons in bottom panel
+  const bottomContent = document.getElementById("bottom-content-menu");
+  if (bottomContent) {
+    bottomContent.addEventListener("click", (e) => {
+      const fileBtn = e.target.closest("[data-palette-file]");
+      if (fileBtn) {
+        openFile(fileBtn.dataset.paletteFile);
+        return;
+      }
+      const themeBtn = e.target.closest("[data-theme-select]");
+      if (themeBtn) {
+        setTheme(themeBtn.dataset.themeSelect);
+        document.querySelectorAll("[data-theme-select]").forEach((c) => c.classList.remove("active"));
+        themeBtn.classList.add("active");
+      }
+    });
+  }
 }
 
 function toggleAssistant() {
@@ -340,10 +404,16 @@ function initDinoGame() {
   const canvas = document.getElementById("dino-canvas");
   if (canvas && !canvas.dataset.initialized) {
     canvas.dataset.initialized = "1";
-    const game = new DinoGame(canvas);
-    canvas.__dinoGame = game;
-    game.start();
+    HELIX_STATE.dinoGame = new DinoGame(canvas);
+    HELIX_STATE.dinoGame.start();
   }
 }
 
-document.addEventListener("DOMContentLoaded", initEditor);
+function stopDinoGame() {
+  if (HELIX_STATE.dinoGame) {
+    HELIX_STATE.dinoGame.stop();
+    HELIX_STATE.dinoGame = null;
+  }
+}
+
+initEditor();

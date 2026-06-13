@@ -3,14 +3,13 @@
     <div class="command-menu modal">
       <div class="command-menu-search">
         <input
-          autofocus
           id="palette-search"
           class="command-menu-input"
           placeholder="Jump to file or search portfolio…"
           aria-label="Command menu search"
-          oninput="onPaletteSearch(this)"
+          data-palette-search
         />
-        <button type="button" class="command-menu-close" onclick="closePalette()" aria-label="Close">Esc</button>
+        <button type="button" class="command-menu-close" data-palette-close aria-label="Close">Esc</button>
       </div>
       <div class="command-menu-body" id="palette-body">
         {% include 'components/command_menu_default.html' %}

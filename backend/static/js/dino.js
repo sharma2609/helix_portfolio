@@ -16,6 +16,7 @@ class DinoGame {
     this.clouds = [];
     this.boundKeyDown = this.handleKeyDown.bind(this);
     this.boundKeyUp = this.handleKeyUp.bind(this);
+    this.boundLoop = this.gameLoop.bind(this);
     this.scoreDisplay = null;
     this.highScoreDisplay = null;
   }
@@ -133,6 +134,7 @@ class DinoGame {
 
   gameLoop() {
     if (!this.gameRunning) return;
+    this.updateThemeColors();
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.updateClouds();
     this.updatePlayer();
@@ -140,7 +142,7 @@ class DinoGame {
     this.drawGround();
     this.updateScore();
     this.gameSpeed += 0.002;
-    this.animationFrameId = requestAnimationFrame(this.gameLoop.bind(this));
+    this.animationFrameId = requestAnimationFrame(this.boundLoop);
   }
 
   updateClouds() {
@@ -236,6 +238,7 @@ class DinoGame {
   }
 
   drawInitialState() {
+    this.updateThemeColors();
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawClouds();
     this.drawGround();
@@ -243,7 +246,6 @@ class DinoGame {
   }
 
   drawPlayer() {
-    this.updateThemeColors();
     this.ctx.fillStyle = this.themeColors.text;
     const { x, y, width, height, duckingHeight, onGround, isDucking } = this.player;
     const currentHeight = isDucking ? duckingHeight : height;
@@ -269,7 +271,6 @@ class DinoGame {
   }
 
   drawObstacle(o) {
-    this.updateThemeColors();
     this.ctx.fillStyle = this.themeColors.obstacle;
     const y = o.y - o.height;
     if (o.isBird) {
@@ -295,13 +296,11 @@ class DinoGame {
   }
 
   drawClouds() {
-    this.updateThemeColors();
     this.ctx.fillStyle = this.themeColors.border;
     this.clouds.forEach((c) => this.ctx.fillRect(c.x, c.y, c.size * 2, c.size));
   }
 
   drawGround() {
-    this.updateThemeColors();
     this.ctx.fillStyle = this.themeColors.text;
     this.ctx.fillRect(0, this.canvas.height - this.groundHeight, this.canvas.width, 2);
   }

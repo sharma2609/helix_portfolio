@@ -2,11 +2,15 @@ from config import RESUME_PDF_URL
 from services.data import load_portfolio
 from services.templates import TEMPLATES
 
+_NO_ARG_FILES = frozenset({"resume.pdf", "dino.js"})
+
 
 def build_code(name: str, data: dict) -> str:
     fn = TEMPLATES.get(name)
     if fn is None:
         return ""
+    if name in _NO_ARG_FILES:
+        return fn()
     p = data["personalInfo"]
     if name == "about.md":
         return fn(data)

@@ -99,13 +99,13 @@ def template_contact(p: dict) -> str:
 </section>"""
 
 
-def template_resume(_p=None) -> str:
+def template_resume() -> str:
     return f"""function downloadResume() {{
   window.open('{RESUME_PDF_URL}', '_blank');
 }}"""
 
 
-def template_dino(_p=None) -> str:
+def template_dino() -> str:
     return """class DinoGame {
   constructor(canvas) {
     this.canvas = canvas;
