@@ -24,7 +24,7 @@ class DinoGame {
   updateThemeColors() {
     const styles = getComputedStyle(document.documentElement);
     this.themeColors.text = styles.getPropertyValue("--text-primary").trim() || "#cccccc";
-    this.themeColors.border = styles.getPropertyValue("--border-primary").trim() || "#3c3c3c";
+    this.themeColors.border = styles.getPropertyValue("--border-strong").trim() || "#3c3c3c";
     this.themeColors.obstacle = styles.getPropertyValue("--obstacle-color").trim() || "#f14c4c";
   }
 
@@ -58,6 +58,8 @@ class DinoGame {
         });
       }
     }
+    this.scoreDisplay = document.getElementById("dino-score");
+    this.highScoreDisplay = document.getElementById("dino-highscore");
     this.updateScoreDisplay();
     this.drawInitialState();
   }

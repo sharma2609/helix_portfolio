@@ -1,0 +1,22 @@
+<div class="buffer-content" id="buffer-{{ name | replace('.', '-') | replace('#', '-') }}">
+<div class="code-pane code-pane-desktop">
+  <div class="pane-label">{{ name }}</div>
+  <pre class="code-scroll">{{ about_code }}</pre>
+</div>
+<div class="preview-pane">
+  <h1>Skills</h1>
+  <p class="preview-lead">Technologies and tools I work with.</p>
+  <div class="tag-grid">
+    {% for group in tag_groups %}
+    <div class="tag-group">
+      <h3>{{ group.label }}</h3>
+      <div class="tags">
+        {% for item in group["items"] %}
+        <span class="tag">{{ item }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>

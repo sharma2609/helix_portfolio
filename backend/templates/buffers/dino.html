@@ -1,13 +1,13 @@
-<div class="buffer-content" id="buffer-dino-js">
+<div class="buffer-content" id="buffer-{{ name | replace('.', '-') | replace('#', '-') }}">
 <div class="code-pane code-pane-desktop">
-  <div class="pane-label">dino.js</div>
+  <div class="pane-label">{{ name }}</div>
   <pre class="code-scroll">{{ dino_code }}</pre>
 </div>
 <div class="preview-pane">
   <div class="game-pane">
     <div class="game-info">
       <span>HI <span id="dino-highscore">00000</span></span>
-      <span style="margin-left: 20px">SCORE: <span id="dino-score">00000</span></span>
+      <span class="game-score-gap">SCORE: <span id="dino-score">00000</span></span>
       <div class="start-message" id="dino-start-msg">Press Space to Start</div>
       <div class="start-message gameover-message hidden" id="dino-gameover-msg">Game Over! Press Space to Restart</div>
     </div>

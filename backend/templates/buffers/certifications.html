@@ -1,0 +1,14 @@
+<div class="buffer-content" id="buffer-{{ name | replace('.', '-') | replace('#', '-') }}">
+<div class="code-pane code-pane-desktop">
+  <div class="pane-label">{{ name }}</div>
+  <pre class="code-scroll">{{ certifications_code }}</pre>
+</div>
+<div class="preview-pane">
+  <h1>Certifications</h1>
+  <div class="tags" style="margin-top: 1rem;">
+    {% for cert in certifications %}
+    <span class="tag" style="padding: 8px 16px; font-size: 12px;">{{ cert }}</span>
+    {% endfor %}
+  </div>
+</div>
+</div>

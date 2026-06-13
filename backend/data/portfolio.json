@@ -6,46 +6,70 @@
     "phone": "(+91) 9149223115",
     "location": "Meerut, Uttar Pradesh, India",
     "socials": {
-      "linkedin": "https://www.linkedin.com/in/priyanshu-sharma",
+      "linkedin": "https://www.linkedin.com/in/priyanshu-sharma-361150238",
       "github": "https://github.com/sharma2609",
-      "portfolio": "https://priyanshusharma.dev"
+      "portfolio": "https://priyanshu-sharma.vercel.app"
     }
   },
+  "summary": "I'm a Computer Science graduate specializing in Artificial Intelligence, Machine Learning, and full-stack development.",
   "experience": [
     {
-      "title": "Guest Faculty",
-      "company": "FIT, Meerut",
-      "period": "Sep 2025 – Dec 2025",
-      "description": "Taught Data Structures & Algorithms and Machine Learning while supporting academic coordination for the 3rd-year batch.",
+      "title": "Minor in AI",
+      "company": "IIT Ropar",
+      "period": "Aug 2024 – Feb 2026",
+      "description": "Completed a multidisciplinary AI program covering Python programming, statistics, machine learning, deep learning, NLP, and generative AI.",
       "highlights": [
-        "Taught Data Structures and Algorithms to 2nd year B.Tech students and Machine Learning to 3rd year students",
-        "Prepared coding assignments and sessional exam papers covering theoretical and practical aspects",
-        "Started a weekly LeetCode session to build regular problem-solving habits",
-        "Handled scheduling and coordination for the 3rd-year batch throughout the semester"
+        "Completed a multidisciplinary AI program covering Python, statistics, ML, deep learning, NLP, and generative AI",
+        "Explored applied AI domains including Robotics, GenAI, and Smart Systems",
+        "Key Tools: Python, NumPy, Pandas, Matplotlib, PyTorch, scikit-learn, Transformers, Seaborn"
+      ],
+      "skills": ["Python", "Machine Learning", "Deep Learning", "NLP", "PyTorch"]
+    },
+    {
+      "title": "Guest Faculty",
+      "company": "Forte Institute of Technology, Meerut",
+      "period": "Sep 2025 – Jan 2026",
+      "description": "Teaching Data Structures to 2nd-year and Machine Learning to 3rd-year B.Tech students.",
+      "highlights": [
+        "Teaching Data Structures to 2nd-year and Machine Learning to 3rd-year B.Tech students",
+        "Set and evaluated sessional examination question papers for both courses",
+        "Implemented a LeetCode-based weekly practice system for Data Structures",
+        "Serving as Year Coordinator for 3rd-year batch, managing academic scheduling and faculty–student coordination"
       ],
       "skills": ["Teaching", "Data Structures", "Machine Learning", "Academic Coordination"]
     },
     {
       "title": "Front-end Intern",
-      "company": "BR Softsol",
+      "company": "BR SoftSol",
       "period": "Aug 2022 – Nov 2022",
-      "description": "Built and maintained responsive web interfaces for dynamic web applications.",
+      "description": "Designed and implemented user interfaces, coded responsive web applications, and gained hands-on experience.",
       "highlights": [
-        "Built and maintained responsive web interfaces for dynamic web applications",
-        "Worked on frontend features using HTML, CSS, JavaScript, and jQuery",
-        "Used AJAX for asynchronous frontend–backend communication, reducing page reloads",
-        "Assisted with debugging reported issues and UI fixes based on feedback"
+        "Designed and implemented responsive user interfaces for dynamic web applications",
+        "Worked on frontend features using HTML, CSS, JavaScript, and jQuery across different parts of the application",
+        "Used AJAX to handle asynchronous frontend–backend communication, reducing page reloads",
+        "Assisted with debugging reported issues and making UI fixes based on feedback"
       ],
       "skills": ["HTML", "CSS", "JavaScript", "jQuery", "AJAX"]
+    },
+    {
+      "title": "Web Development Intern",
+      "company": "MIET, Meerut",
+      "period": "Sep 2021 – Oct 2021",
+      "description": "Developed a simple web app showcasing proficiency in frontend development.",
+      "highlights": [
+        "Developed a simple web application demonstrating frontend development skills",
+        "Gained hands-on experience with HTML, CSS, and JavaScript"
+      ],
+      "skills": ["HTML", "CSS", "JavaScript"]
     },
     {
       "title": "Python Internship",
       "company": "E&ICT Academy, IIT Kanpur",
       "period": "Aug 2021 – Mar 2022",
-      "description": "Structured Python programming internship covering core concepts and OOP.",
+      "description": "Completed a structured Python programming internship covering core language concepts and object-oriented programming.",
       "highlights": [
-        "Completed a structured Python programming internship covering core language concepts and OOP",
-        "Built various projects applying concepts learned throughout the program",
+        "Completed a structured Python programming internship covering core concepts and OOP",
+        "Built various projects as part of the coursework applying concepts learned throughout the program",
         "Gained hands-on experience writing clean, modular Python code through regular assignments"
       ],
       "skills": ["Python", "OOP", "Problem Solving"]
@@ -59,9 +83,9 @@
       "description": "Designed and implemented the Python-based machine learning backend for a fake news detection system.",
       "techStack": ["Python", "scikit-learn", "Pandas", "NumPy"],
       "features": [
-        "Performed manual data collection of real-world fake and true news articles with extensive preprocessing",
+        "Performed manual data collection of real-world fake and true news articles with extensive preprocessing for noisy and unstructured data",
         "Applied TF-IDF vectorization for text representation",
-        "Trained and evaluated Logistic Regression, Decision Tree, Gradient Boosting, and Random Forest",
+        "Trained and evaluated multiple supervised learning models: Logistic Regression, Decision Tree, Gradient Boosting, and Random Forest",
         "Conducted comparative performance analysis using Accuracy, Precision, Recall, and F1-Score"
       ]
     },
@@ -69,22 +93,22 @@
       "name": "Multilingual Translation & Transliteration System",
       "type": "Minor in Artificial Intelligence – Final Assignment",
       "domain": "Applied NLP, Multilingual Language Processing",
-      "description": "End-to-end multilingual NLP system supporting translation across five languages using transformer-based models.",
+      "description": "End-to-end multilingual NLP system supporting translation across five languages using pre-trained transformer-based models.",
       "techStack": ["Python", "PyTorch", "Transformers", "NLLB-200", "Whisper", "Streamlit"],
       "features": [
-        "Translation across English, Hindi, Japanese, Chinese, and Russian using pre-trained transformer models",
-        "Implemented training, inference, and testing workflows for multilingual text processing",
-        "Integrated speech-to-text and text-to-speech for a multimodal text and audio pipeline",
+        "Supported translation across five languages (English, Hindi, Japanese, Chinese, Russian) using pre-trained transformer models",
+        "Implemented and evaluated training, inference, and testing workflows for multilingual text processing",
+        "Integrated speech-to-text and text-to-speech for a multimodal text and audio processing pipeline",
         "Deployed an interactive Streamlit interface for real-time translation, transliteration, and speech processing"
       ]
     }
   ],
   "education": [
     {
-      "degree": "Minor in AI",
+      "degree": "Major in AI",
       "field": "Artificial Intelligence",
-      "institution": "IIT Ropar",
-      "year": "2024 – 2026",
+      "institution": "Indian Institute of Technology, Ropar",
+      "year": "Aug 2024 – Feb 2026",
       "details": "Multidisciplinary AI program covering machine learning, deep learning, NLP, and applied language systems."
     },
     {
@@ -95,26 +119,41 @@
       "details": "B.Tech in Computer Science and Engineering."
     },
     {
-      "degree": "XII (CBSE)",
+      "degree": "XII (Intermediate)",
+      "field": "PCM",
       "institution": "Dayawati Modi Academy",
       "year": "2018 – 2019",
       "details": "Higher Secondary Education."
+    },
+    {
+      "degree": "High School",
+      "institution": "Dayawati Modi Academy",
+      "year": "",
+      "details": "Completed secondary education."
     }
   ],
   "skills": {
     "programming": ["Python", "JavaScript", "SQL"],
     "ai_ml": ["Machine Learning", "Deep Learning", "NLP", "Neural Networks", "Classification"],
     "libraries": ["NumPy", "Pandas", "Matplotlib", "Seaborn", "PyTorch", "scikit-learn", "Transformers"],
-    "tools": ["Git", "Colab", "Streamlit"],
-    "webDev": ["HTML", "CSS", "Tailwind CSS", "React", "Vite"],
+    "tools": ["Git", "Colab", "Streamlit", "Linux"],
+    "webDev": ["HTML", "CSS", "Tailwind CSS", "React", "Vite", "node.js", "express.js"],
     "databases": ["MySQL"],
-    "core": ["Data Structures", "Algorithms", "Object-Oriented Programming"]
+    "core": ["Data Structures", "Algorithms", "Object-Oriented Programming", "Teaching"]
   },
+  "certifications": [
+    "The Joy of Computing using Python — NPTEL",
+    "Major in Artificial Intelligence — IIT Ropar",
+    "Python Programming Certificate"
+  ],
+  "honors": [
+    "Represented India at the 7th Fujairah International Taekwondo Championship",
+    "Four-Time Gold Medalist at CBSE Zonal Taekwondo Championship — Secured Spot in Nationals Consecutively",
+    "Three Times National Medalist in Taekwondo (2 Gold, 1 Silver)"
+  ],
   "achievements": [
     "Black Belt Dan - 1 in Taekwondo (2016)",
-    "Participated in the 7th Fujairah International Taekwondo Championship (2019)",
-    "National Medalist in Taekwondo — 2 Gold, 1 Silver (2015, 2017, 2018)",
     "Vice Sports Captain in the School Council Body (2017 – 2018)",
-    "Completed 75+ Questions at LeetCode"
+    "Completed 100+ Questions at LeetCode"
   ]
 }

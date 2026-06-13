@@ -54,8 +54,11 @@ class Skills(BaseModel):
 
 class PortfolioData(BaseModel):
     personalInfo: PersonalInfo = PersonalInfo()
+    summary: str = ""
     experience: list[Experience] = []
     projects: list[Project] = []
     education: list[Education] = []
     skills: Skills = Skills()
+    certifications: list[str] = []
+    honors: list[str] = []
     achievements: list[str] = []

@@ -16,10 +16,12 @@ from services.data import load_portfolio
 from services.templates import (
     template_about,
     template_career_timeline,
+    template_certifications,
     template_contact,
     template_dino,
     template_extracurriculars,
     template_home,
+    template_honors,
     template_projects,
     template_resume,
 )
@@ -75,6 +77,9 @@ def _base_context(data: dict) -> dict:
         "projects": data["projects"],
         "education": data["education"],
         "skills": data["skills"],
+        "summary": data.get("summary", ""),
+        "certifications": data.get("certifications", []),
+        "honors": data.get("honors", []),
         "achievements": data["achievements"],
         "resume_pdf_url": RESUME_PDF_URL,
     }
@@ -109,7 +114,7 @@ def get_buffer(request: Request, name: str):
 
     if name == "home.jsx":
         ctx["home_code"] = template_home(p)
-    elif name == "about.md":
+    elif name in ("about.md", "skills.md", "experience.md", "education.md"):
         ctx["about_code"] = template_about(data)
         tag_groups = [
             {"label": "Programming", "items": skills["programming"]},
@@ -122,6 +127,8 @@ def get_buffer(request: Request, name: str):
         ]
         ctx["tag_groups"] = tag_groups
         ctx["experience"] = experience
+        ctx["education"] = education
+        ctx["summary"] = data.get("summary", "")
     elif name == "projects.js":
         ctx["projects_code"] = template_projects(data)
         ctx["projects"] = projects
@@ -155,6 +162,12 @@ def get_buffer(request: Request, name: str):
             meta = _achievement_meta(a)
             achievement_items.append({"type": meta["type"], "text": a, "date": meta["date"]})
         ctx["achievement_items"] = achievement_items
+    elif name == "certifications.md":
+        ctx["certifications_code"] = template_certifications(data)
+        ctx["certifications"] = data.get("certifications", [])
+    elif name == "honors.md":
+        ctx["honors_code"] = template_honors(data)
+        ctx["honors"] = data.get("honors", [])
     elif name == "dino.js":
         ctx["dino_code"] = template_dino()
     else:
@@ -169,6 +182,11 @@ def _buffer_template_name(name: str) -> str:
     mapping = {
         "home.jsx": "buffers/home.html",
         "about.md": "buffers/about.html",
+        "skills.md": "buffers/skills.html",
+        "experience.md": "buffers/experience.html",
+        "education.md": "buffers/education.html",
+        "certifications.md": "buffers/certifications.html",
+        "honors.md": "buffers/honors.html",
         "projects.js": "buffers/projects.html",
         "contact.html": "buffers/contact.html",
         "resume.pdf": "buffers/resume.html",

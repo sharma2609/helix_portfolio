@@ -1,0 +1,26 @@
+<div class="buffer-content" id="buffer-{{ name | replace('.', '-') | replace('#', '-') }}">
+<div class="code-pane code-pane-desktop">
+  <div class="pane-label">{{ name }}</div>
+  <pre class="code-scroll">{{ about_code }}</pre>
+</div>
+<div class="preview-pane">
+  <h1>Experience</h1>
+  <p class="preview-lead">Professional journey and work history.</p>
+  <section class="exp-section">
+    {% for exp in experience %}
+    <article class="exp-card">
+      <p class="exp-title">{{ exp.title }} · {{ exp.company }}</p>
+      <p class="exp-period">{{ exp.period }}</p>
+      <p class="exp-desc">{{ exp.description }}</p>
+      {% if exp.highlights %}
+      <ul class="exp-highlights">
+        {% for h in exp.highlights %}
+        <li>{{ h }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+</div>
+</div>

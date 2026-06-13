@@ -1,6 +1,6 @@
-<div class="buffer-content" id="buffer-extracurriculars-git">
+<div class="buffer-content" id="buffer-{{ name | replace('.', '-') | replace('#', '-') }}">
 <div class="code-pane code-pane-desktop">
-  <div class="pane-label">extracurriculars.git</div>
+  <div class="pane-label">{{ name }}</div>
   <pre class="code-scroll">{{ achievements_code }}</pre>
 </div>
 <div class="preview-pane">

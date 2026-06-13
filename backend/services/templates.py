@@ -96,6 +96,7 @@ def template_contact(p: dict) -> str:
   <a href="{li_esc}">LinkedIn</a>
   <a href="{gh_esc}">GitHub</a>
   <a href="{po_esc}">Portfolio</a>
+  <a href="tel:{p['phone']}">{p['phone']}</a>
 </section>"""
 
 
@@ -118,41 +119,57 @@ def template_dino() -> str:
 
 
 def template_career_timeline(p: dict) -> str:
-    return f"""commit guestfaculty2025 (HEAD -> main)
-Author: {p['name']}
-Date:   2025
-
-    feat: Guest Faculty at FIT, Meerut (DSA & ML)
-
-commit aiminor2024
+    return f"""commit minor-ai-iit-ropar (HEAD -> main)
 Author: {p['name']}
 Date:   2024-2026
 
     feat: Minor in AI at IIT Ropar
 
-commit projects2024
+commit guest-faculty-fortecollege
+Author: {p['name']}
+Date:   2025
+
+    feat: Guest Faculty at Forte Institute of Technology, Meerut
+
+commit projects-2024
 Author: {p['name']}
 Date:   2024
 
     docs: Fake News Detection & Multilingual NLP systems
 
-commit frontend2022
+commit frontend-intern-brsoftsol
 Author: {p['name']}
 Date:   2022
 
-    feat: Front-end Intern at BR Softsol
+    feat: Front-end Intern at BR SoftSol
 
-commit python2021
+commit webdev-intern-miet
+Author: {p['name']}
+Date:   2021
+
+    feat: Web Development Intern at MIET, Meerut
+
+commit python-intern-iitkanpur
 Author: {p['name']}
 Date:   2021-2022
 
     init: Python Internship at E&ICT Academy, IIT Kanpur
 
-commit btech2024
+commit btech-miet
 Author: {p['name']}
 Date:   2020-2024
 
     init: B.Tech (CSE) from MIET, Meerut"""
+
+
+def template_certifications(data: dict) -> str:
+    certs = data.get("certifications", [])
+    return "\n".join(f"- {c}" for c in certs) if certs else "# Certifications\n\n*No certifications listed.*"
+
+
+def template_honors(data: dict) -> str:
+    honors = data.get("honors", [])
+    return "\n".join(f"- {h}" for h in honors) if honors else "# Honors & Awards\n\n*No honors listed.*"
 
 
 def template_extracurriculars(p: dict, data: dict) -> str:
@@ -177,4 +194,6 @@ TEMPLATES = {
     "dino.js": template_dino,
     "career_timeline.git": template_career_timeline,
     "extracurriculars.git": template_extracurriculars,
+    "certifications.md": template_certifications,
+    "honors.md": template_honors,
 }

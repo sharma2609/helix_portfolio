@@ -1,0 +1,21 @@
+<div class="buffer-content" id="buffer-{{ name | replace('.', '-') | replace('#', '-') }}">
+<div class="code-pane code-pane-desktop">
+  <div class="pane-label">{{ name }}</div>
+  <pre class="code-scroll">{{ about_code }}</pre>
+</div>
+<div class="preview-pane">
+  <h1>Education</h1>
+  <p class="preview-lead">Academic background and qualifications.</p>
+  <section class="exp-section">
+    {% for edu in education %}
+    <article class="exp-card">
+      <p class="exp-title">{{ edu.degree }}{% if edu.field %} · {{ edu.field }}{% endif %}</p>
+      <p class="exp-period">{{ edu.institution }} · {{ edu.year }}</p>
+      {% if edu.details %}
+      <p class="exp-desc">{{ edu.details }}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+</div>
+</div>

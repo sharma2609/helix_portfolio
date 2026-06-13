@@ -1,11 +1,14 @@
-<div class="buffer-content" id="buffer-about-md">
+<div class="buffer-content" id="buffer-{{ name | replace('.', '-') | replace('#', '-') }}">
 <div class="code-pane code-pane-desktop">
-  <div class="pane-label">about.md</div>
+  <div class="pane-label">{{ name }}</div>
   <pre class="code-scroll">{{ about_code }}</pre>
 </div>
 <div class="preview-pane">
   <h1>About Me</h1>
   <p>Hello! I'm <strong>{{ p.name }}</strong>, {{ p.role }}.</p>
+  {% if summary %}
+  <p class="preview-lead">{{ summary }}</p>
+  {% endif %}
   <div class="tag-grid">
     {% for group in tag_groups %}
     <div class="tag-group">
@@ -31,6 +34,18 @@
         <li>{{ h }}</li>
         {% endfor %}
       </ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+  <section class="exp-section">
+    <h2 class="section-title">Education</h2>
+    {% for edu in education %}
+    <article class="exp-card">
+      <p class="exp-title">{{ edu.degree }}{% if edu.field %} · {{ edu.field }}{% endif %}</p>
+      <p class="exp-period">{{ edu.institution }} · {{ edu.year }}</p>
+      {% if edu.details %}
+      <p class="exp-desc">{{ edu.details }}</p>
       {% endif %}
     </article>
     {% endfor %}

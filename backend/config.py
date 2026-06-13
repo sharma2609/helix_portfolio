@@ -6,8 +6,13 @@ RESUME_PDF_PATH = BASE_DIR / "static" / "PriyanshuSharma_Resume.pdf"
 RESUME_PDF_URL = "/static/PriyanshuSharma_Resume.pdf"
 
 FILE_ENTRIES = [
-    {"name": "home.jsx", "group": "portfolio", "keywords": "welcome home introduction portfolio react overview"},
-    {"name": "about.md", "group": "portfolio", "keywords": "about skills experience education python javascript react AI ML"},
+    {"name": "home.jsx", "group": "portfolio", "keywords": "welcome home introduction portfolio overview"},
+    {"name": "about.md", "group": "portfolio", "keywords": "about biography background introduction personal summary"},
+    {"name": "skills.md", "group": "portfolio", "keywords": "skills programming languages python javascript SQL AI ML libraries tools"},
+    {"name": "experience.md", "group": "portfolio", "keywords": "experience work IIT Ropar guest faculty internship MIET BR Softsol teaching"},
+    {"name": "education.md", "group": "portfolio", "keywords": "education IIT Ropar MIET Dayawati Modi Academy degree university schooling"},
+    {"name": "certifications.md", "group": "portfolio", "keywords": "certifications NPTEL Python programming AI IIT Ropar"},
+    {"name": "honors.md", "group": "portfolio", "keywords": "honors awards taekwondo national medalist gold medal sports championship"},
     {"name": "projects.js", "group": "portfolio", "keywords": "projects fake news detection multilingual translation NLP machine learning"},
     {"name": "contact.html", "group": "portfolio", "keywords": "contact email linkedin github phone location get in touch"},
     {"name": "resume.pdf", "group": "portfolio", "keywords": "resume CV download PDF professional document"},
@@ -28,7 +33,7 @@ THEMES = [
 ]
 
 NAV_SECTIONS = [
-    {"id": "portfolio", "label": "Portfolio", "description": "Profile, work & contact"},
+    {"id": "portfolio", "label": "Portfolio", "description": "Profile, skills & projects"},
     {"id": "career", "label": "Career", "description": "Timeline & achievements"},
     {"id": "playground", "label": "Playground", "description": "Extras & experiments"},
 ]
@@ -36,6 +41,11 @@ NAV_SECTIONS = [
 FILE_META = {
     "home.jsx": {"label": "Home", "ext": "jsx"},
     "about.md": {"label": "About", "ext": "md"},
+    "skills.md": {"label": "Skills", "ext": "md"},
+    "experience.md": {"label": "Experience", "ext": "md"},
+    "education.md": {"label": "Education", "ext": "md"},
+    "certifications.md": {"label": "Certifications", "ext": "md"},
+    "honors.md": {"label": "Honors", "ext": "md"},
     "projects.js": {"label": "Projects", "ext": "js"},
     "contact.html": {"label": "Contact", "ext": "html"},
     "resume.pdf": {"label": "Resume", "ext": "pdf"},

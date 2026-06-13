@@ -30,8 +30,13 @@ function initEditor() {
 }
 
 function loadTheme() {
-  const saved = localStorage.getItem("helix-theme") || "helix";
-  document.documentElement.setAttribute("data-theme", saved);
+  const saved = localStorage.getItem("helix-theme");
+  if (saved) {
+    document.documentElement.setAttribute("data-theme", saved);
+  } else {
+    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    document.documentElement.setAttribute("data-theme", prefersLight ? "mono-light" : "helix");
+  }
 }
 
 function initKeyboard() {
@@ -122,11 +127,14 @@ function renderTabs() {
   }
   container.innerHTML = HELIX_STATE.openTabs
     .map(
-      (name) => `
-    <div class="buffer-tab ${HELIX_STATE.activeTab === name ? "active" : ""}" data-buffer="${name}">
-      <button type="button">${FILE_META[name]?.label || name}</button>
+      (name) => {
+        const isActive = HELIX_STATE.activeTab === name;
+        return `
+    <div class="buffer-tab ${isActive ? "active" : ""}" data-buffer="${name}">
+      <button type="button"${isActive ? ' aria-current="page"' : ""}>${FILE_META[name]?.label || name}</button>
       <button type="button" class="tab-close" aria-label="Close ${name}">×</button>
-    </div>`
+    </div>`;
+      }
     )
     .join("");
 }
@@ -240,9 +248,14 @@ function closePalette() {
   document.getElementById("palette-overlay").classList.add("hidden");
 }
 
+let paletteDefaultHTML = null;
+
 function showPaletteDefault() {
   const body = document.getElementById("palette-body");
-  body.innerHTML = document.getElementById("palette-default-content").innerHTML;
+  if (!paletteDefaultHTML) {
+    paletteDefaultHTML = body.innerHTML;
+  }
+  body.innerHTML = paletteDefaultHTML;
   initPaletteButtons();
   initThemeChips();
 }
