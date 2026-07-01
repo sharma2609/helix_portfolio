@@ -1,6 +1,11 @@
 const FILE_META = {
   "home.jsx": { label: "Home", ext: "jsx" },
   "about.md": { label: "About", ext: "md" },
+  "skills.md": { label: "Skills", ext: "md" },
+  "experience.md": { label: "Experience", ext: "md" },
+  "education.md": { label: "Education", ext: "md" },
+  "certifications.md": { label: "Certifications", ext: "md" },
+  "honors.md": { label: "Honors", ext: "md" },
   "projects.js": { label: "Projects", ext: "js" },
   "contact.html": { label: "Contact", ext: "html" },
   "resume.pdf": { label: "Resume", ext: "pdf" },

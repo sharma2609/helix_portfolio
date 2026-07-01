@@ -2,6 +2,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_PATH = BASE_DIR / "data" / "portfolio.json"
+
+# Place PriyanshuSharma_Resume.pdf in backend/static/ to enable the resume download button
 RESUME_PDF_PATH = BASE_DIR / "static" / "PriyanshuSharma_Resume.pdf"
 RESUME_PDF_URL = "/static/PriyanshuSharma_Resume.pdf"
 

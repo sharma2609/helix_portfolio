@@ -39,8 +39,8 @@ def get_reply(message: str) -> str:
     education = data["education"]
     achievements = data["achievements"]
 
-    fake_news = next((p for p in projects if "Fake News" in p["name"]), projects[0] if projects else {})
-    translation = next((p for p in projects if "Translation" in p["name"] or "Transliteration" in p["name"]), projects[0] if projects else {})
+    fake_news = next((p for p in projects if "Fake News" in p["name"]), None)
+    translation = next((p for p in projects if "Translation" in p["name"] or "Transliteration" in p["name"]), None)
 
     if _match_words(text, _HELLO_WORDS):
         return (
@@ -67,19 +67,21 @@ def get_reply(message: str) -> str:
             )
         return "\n\n".join(blocks)
 
-    if not _match_words(text, frozenset(("website", "site"))) and _match_words(text, _PROJECT_WORDS):
+    if _match_words(text, _PROJECT_WORDS):
         return "\n\n".join(
             f"{i + 1}. {pr['name']}\n   {pr['description']}\n   Tech: {', '.join(pr['techStack'])}"
             for i, pr in enumerate(projects)
         )
 
     if _match_phrases(text, _FAKE_NEWS_PHRASES) and "translation" not in text:
-        pr = fake_news
-        return f"{pr['name']}\n{pr['description']}\nTech: {', '.join(pr['techStack'])}"
+        if fake_news is None:
+            return "I don't have project details to share right now."
+        return f"{fake_news['name']}\n{fake_news['description']}\nTech: {', '.join(fake_news['techStack'])}"
 
     if _match_phrases(text, _TRANSLATION_PHRASES):
-        pr = translation
-        return f"{pr['name']}\n{pr['description']}\nTech: {', '.join(pr['techStack'])}"
+        if translation is None:
+            return "I don't have project details to share right now."
+        return f"{translation['name']}\n{translation['description']}\nTech: {', '.join(translation['techStack'])}"
 
     if _match_words(text, _EDUCATION_WORDS):
         return "\n\n".join(

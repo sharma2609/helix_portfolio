@@ -1,4 +1,5 @@
 import json
+import re
 
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
@@ -36,18 +37,25 @@ def _init_templates(templates_instance: Jinja2Templates):
     templates = templates_instance
 
 
+_ACHIEVEMENT_PATTERNS: list[tuple[re.Pattern, str, str]] = [
+    (re.compile(r"Black Belt", re.IGNORECASE), "achievement", "2016"),
+    (re.compile(r"Fujairah", re.IGNORECASE), "feat", "2019"),
+    (re.compile(r"National Medalist", re.IGNORECASE), "achievement", "2015, 2017, 2018"),
+    (re.compile(r"Vice Sports", re.IGNORECASE), "feat", "2017 – 2018"),
+    (re.compile(r"LeetCode", re.IGNORECASE), "feat", "ongoing"),
+]
+
+
 def _achievement_meta(text: str) -> dict:
-    if "Black Belt" in text:
-        return {"type": "achievement", "date": "2016"}
-    if "Fujairah" in text:
-        return {"type": "feat", "date": "2019"}
-    if "National Medalist" in text:
-        return {"type": "achievement", "date": "2015, 2017, 2018"}
-    if "Vice Sports" in text:
-        return {"type": "feat", "date": "2017 – 2018"}
-    if "LeetCode" in text:
-        return {"type": "feat", "date": "ongoing"}
-    return {"type": "feat", "date": ""}
+    for pattern, typ, date in _ACHIEVEMENT_PATTERNS:
+        if pattern.search(text):
+            return {"type": typ, "date": date}
+
+    years = re.findall(r"\b(19|20)\d{2}\b", text)
+    return {
+        "type": "feat",
+        "date": ", ".join(sorted(set(years))) if years else "",
+    }
 
 
 def _nav_sections_with_files():

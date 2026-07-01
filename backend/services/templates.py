@@ -188,6 +188,9 @@ Author: {p['name']}
 TEMPLATES = {
     "home.jsx": template_home,
     "about.md": template_about,
+    "skills.md": template_about,
+    "experience.md": template_about,
+    "education.md": template_about,
     "projects.js": template_projects,
     "contact.html": template_contact,
     "resume.pdf": template_resume,

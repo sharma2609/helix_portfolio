@@ -1,7 +1,6 @@
 import json
 import threading
 from functools import lru_cache
-from pathlib import Path
 
 from config import DATA_PATH
 from models import PortfolioData
